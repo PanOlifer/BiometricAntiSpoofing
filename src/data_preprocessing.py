@@ -1,24 +1,26 @@
-import numpy as np
 import pandas as pd
+import numpy as np
 import cv2
-import nbformat
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import nbformat
 
-def read_notebook(notebook_path):
+def extract_data_from_notebook(notebook_path):
     """
-    Читает Jupyter ноутбук и возвращает его содержимое.
+    Извлекает данные из Jupyter ноутбука.
     """
     with open(notebook_path, 'r', encoding='utf-8') as file:
         nb = nbformat.read(file, as_version=4)
-    return nb
 
-def extract_data_from_notebook(notebook, data_path):
-    """
-    Извлекает данные из Jupyter ноутбука и сохраняет их в указанном пути.
-    """
-    # Здесь должен быть код для извлечения данных из ячеек ноутбука
-    # Например, если данные находятся в определенной ячейке, извлеките их и сохраните
-    # ...
+    # Пример кода для извлечения данных из ноутбука
+    # Это нужно доработать в зависимости от структуры и содержания ноутбука
+    data = None
+    for cell in nb.cells:
+        if cell.cell_type == 'code':
+            # Пример: поиск и извлечение определенных данных из кодовых ячеек
+            # ...
+            pass
+
+    return data
 
 def preprocess_image(image, target_size=(224, 224)):
     """
@@ -28,24 +30,23 @@ def preprocess_image(image, target_size=(224, 224)):
     image = image / 255.0  # Нормализация
     return image
 
-def prepare_data_generator(data_frame, image_column, label_column, batch_size=32):
+def prepare_data_generator(data, batch_size=32):
     """
     Подготавливает генератор данных для модели.
     """
     datagen = ImageDataGenerator(rescale=1./255)
     generator = datagen.flow_from_dataframe(
-        dataframe=data_frame,
-        x_col=image_column,    # Название столбца с путями к файлам
-        y_col=label_column,    # Название столбца с метками
-        class_mode='raw',      # Тип меток
+        dataframe=data,
+        x_col='file_path',  # Название столбца с путями к файлам
+        y_col='label',      # Метки
+        class_mode='raw',   # Тип меток
         batch_size=batch_size,
-        shuffle=True,          # Перемешивание данных
-        target_size=(224, 224)) # Размер изображений
+        shuffle=True,       # Перемешивание данных
+        target_size=(224, 224))  # Размер изображений
     return generator
 
 # Пример использования
 notebook_path = 'data/age_recognitionV1.ipynb'
-data_path = 'processed_data/data.csv'  # Путь для сохранения извлеченных данных
-notebook = read_notebook(notebook_path)
-extract_data_from_notebook(notebook, data_path)
+data = extract_data_from_notebook(notebook_path)
 
+data_generator = prepare_data_generator(data)
