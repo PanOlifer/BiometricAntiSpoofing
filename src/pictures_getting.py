@@ -1,7 +1,8 @@
-# install cv2
+# TODO:  fix the code to make it works?
 import cv2
 import time
 import os
+
 # Path to the output directory
 output_dir = 'C:/Users/User/Documents/GitHub/BiometricAntiSpoofing/src/pics/'
 
@@ -45,4 +46,4 @@ for i, frame in enumerate(frames):
     filename = f'frame_{i}.jpg'
     filepath = os.path.join(output_dir, filename)
     cv2.imwrite(filepath, frame)
-    print(f"Saved frame {i+1} as {filepath}")
+    print(f"Saved frame {i + 1} as {filepath}")
