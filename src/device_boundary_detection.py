@@ -51,7 +51,7 @@ def find_rectangular_contours(edges):
     return rectangular_contours
 
 # Пример использования
-image_path = 'path/to/your/image.jpg'
+image_path = 'pdata/pics/frame_5.jpg'
 image = load_image(image_path)
 gray_image = convert_to_grayscale(image)
 blurred_image = gaussian_blur(gray_image)

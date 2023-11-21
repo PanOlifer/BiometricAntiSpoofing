@@ -1,20 +1,15 @@
 import pygame
 
-# Initialize Pygame
 pygame.init()
 
-# Create the window surface
-window_surface = pygame.display.set_mode((800, 600))  # Set your desired window dimensions
+window_surface = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Green Square")
 
-# Set the initial position of the square
 square_size = 50
 square_x, square_y = 0, 0
 
-# Set the green color (R, G, B)
 green = (0, 255, 0)
 
-# Set the maximum number of pixels to move in each frame
 max_move_pixels = 2
 
 phases = [

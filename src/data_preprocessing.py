@@ -46,7 +46,7 @@ def prepare_data_generator(data, batch_size=32):
     return generator
 
 # Пример использования
-notebook_path = 'data/age_recognitionV1.ipynb'
+notebook_path = 'notebooks/webcam_pics_getting.ipynb'
 data = extract_data_from_notebook(notebook_path)
 
 data_generator = prepare_data_generator(data)
