@@ -1,9 +1,9 @@
 # Импорт модулей
-from data_preprocessing import preprocess_data
-from device_boundary_detection import detect_device_boundaries
-from face_micro_movements_detector import FaceMicroMovementsDetector
-from texture_analysis import analyze_texture
-from image_preprocessing import preprocess_image
+from src.data_preprocessing import preprocess_data
+from src.device_boundary_detection import detect_device_boundaries
+from src.face_micro_movements_detector import FaceMicroMovementsDetector
+from src.texture_analysis import analyze_texture
+from src.image_preprocessing import preprocess_image
 # Импортируйте другие необходимые модули
 
 def main():

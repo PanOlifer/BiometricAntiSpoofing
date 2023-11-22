@@ -1,0 +1,6 @@
+scikit-learn
+pandas
+matplotlib
+opencv-python
+tensorflow
+nbformat
