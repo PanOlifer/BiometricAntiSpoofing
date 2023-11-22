@@ -4,7 +4,7 @@ from src.device_boundary_detection import detect_device_boundaries
 from src.face_micro_movements_detector import FaceMicroMovementsDetector
 from src.texture_analysis import analyze_texture
 from src.image_preprocessing import preprocess_image
-from src.pictures_getting import load_images_from_directory  # Предполагается, что такая функция есть
+from src.pictures_getting import load_images_from_directory
 
 def load_your_data(directory_path):
     # Загрузка изображений из директории
@@ -18,10 +18,15 @@ def main():
     data = load_your_data(data_directory)
     preprocessed_data = preprocess_data(data)
 
-    # Анализ текстур и обнаружение границ устройств
+    # Поток обработки каждого изображения
     for image in preprocessed_data:
+        # Предобработка изображения
         processed_image = preprocess_image(image)
+
+        # Анализ текстуры
         texture_features = analyze_texture(processed_image)
+
+        # Обнаружение границ устройств
         device_boundaries = detect_device_boundaries(processed_image)
 
         # Обнаружение микродвижений
