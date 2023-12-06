@@ -14,7 +14,7 @@
 ## Технологии
 
 - Python, OpenCV, scikit-learn, TensorFlow/PyTorch
-- Jupyter Notebook для анализа и тестирования
+- Jupyter Notebook для анализа и тестирования ML
 
 ## Установка
 
