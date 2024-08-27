@@ -5,6 +5,7 @@ from src.face_micro_movements_detector import FaceMicroMovementsDetector
 from src.texture_analysis import analyze_texture
 from src.image_preprocessing import preprocess_image
 from src.pictures_getting import load_images_from_directory
+from cli import main
 
 def load_your_data(directory_path):
     # Загрузка изображений из директории
