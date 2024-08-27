@@ -19,7 +19,7 @@
 ## Установка
 
 ```bash
-git clone https://github.com/Artem-Olifirenko/BiometricAntiSpoofing.git
+git clone https://github.com/PanOlifer/BiometricAntiSpoofing.git
 cd BiometricAntiSpoofing
 pip install -r requirements.txt
 ```
