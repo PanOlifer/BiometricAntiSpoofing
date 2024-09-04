@@ -1,8 +1,9 @@
 import cv2
 import time
 import os
+from typing import Optional
 
-def capture_images(output_dir, capture_duration=10, display_frames=False):
+def capture_images(output_dir: str, capture_duration: int = 10, display_frames: bool = False) -> None:
     """
     Захватывает изображения с веб-камеры и сохраняет их в указанную директорию.
 
@@ -11,33 +12,38 @@ def capture_images(output_dir, capture_duration=10, display_frames=False):
         capture_duration (int): Длительность захвата в секундах.
         display_frames (bool): Если True, показывает захватываемые кадры.
     """
+    try:
+        cap = cv2.VideoCapture(0)
+        if not cap.isOpened():
+            raise RuntimeError("Не удалось открыть веб-камеру.")
 
-    # Инициализация захвата видео с веб-камеры
-    cap = cv2.VideoCapture(0)
+        fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
+        total_frames = int(fps * capture_duration)
 
-    # Определение частоты кадров
-    fps = cap.get(cv2.CAP_PROP_FPS)
-    total_frames = int(fps * capture_duration)
+        os.makedirs(output_dir, exist_ok=True)
 
-    # Создание директории для вывода, если она не существует
-    os.makedirs(output_dir, exist_ok=True)
+        for i in range(total_frames):
+            ret, frame = cap.read()
+            if not ret:
+                print(f"Ошибка при захвате кадра {i}.")
+                continue
 
-    # Захват кадров
-    for i in range(total_frames):
-        ret, frame = cap.read()
-        if ret:
             filename = f'frame_{i}.jpg'
             filepath = os.path.join(output_dir, filename)
             cv2.imwrite(filepath, frame)
+
             if display_frames:
                 cv2.imshow('Video', frame)
-                cv2.waitKey(1)
-            print(f"Saved frame {i + 1} as {filepath}")
-        time.sleep(1 / fps)
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
 
-    # Освобождение захвата видео и закрытие окон
-    cap.release()
-    cv2.destroyAllWindows()
+            print(f"Сохранен кадр {i + 1} как {filepath}")
+            time.sleep(1 / fps)
 
-# Пример вызова функции
+        cap.release()
+        cv2.destroyAllWindows()
+
+    except Exception as e:
+        print(f"Ошибка при захвате изображений: {e}")
+
 capture_images('C:/Users/User/Documents/GitHub/BiometricAntiSpoofing/src/pics/')
